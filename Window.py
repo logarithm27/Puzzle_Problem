@@ -1,11 +1,10 @@
-# usr/bin/Omar/2019/NxN Puzzle
-
+# !usr/bin/Omar/2019/NxN Puzzle
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtWidgets import QApplication
-from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QRect, QPropertyAnimation
 from Ui import UiForm
+
 
 class MainWindow():
     def __init__(self):
@@ -14,10 +13,14 @@ class MainWindow():
         self.ui.setup_ui(self.main_win)
         self.main_win.setStyleSheet("background-color: rgb(178, 222, 124)")
         self.main_win.setFixedSize(self.main_win.width(), self.main_win.height())
-        # self.ui.buttons[2][2].clicked.connect(lambda : self.on_button_click(160, 160, self.ui.pushButton_8))
+        # TO DO : functions slot to animate the block's move
+
+        # self.ui.buttons[0][0].clicked.connect(lambda : self.on_button_click(160, 160, self.ui.pushButton_8))
 
     def show(self):
         self.main_win.show()
+
+    # TO DO : animate button's move
 
     def on_button_click(self, x_coordinate, y_coordinate, _button):
         self.anim = QPropertyAnimation(_button, b"geometry")
@@ -26,6 +29,7 @@ class MainWindow():
         self.anim.setEndValue(QRect(x_coordinate, y_coordinate, 77, 77))
         print('mooving')
         self.anim.start()
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
