@@ -18,10 +18,10 @@ def matrix():
     index = numpy.where(initial_puzzle_state == max_range-1)[0][0]
     initial_puzzle_state[index][index] = -1
     final_puzzle_state[index][index] = -1
-# shuffling
-    numpy.random.shuffle(initial_puzzle_state[0])
-    numpy.random.shuffle(initial_puzzle_state[1])
-    numpy.random.shuffle(initial_puzzle_state[2])
+    # shuffling columns
+    for i in range(num_blocks):
+        numpy.random.shuffle(initial_puzzle_state[i])
+    # shuffling lines
     numpy.random.shuffle(initial_puzzle_state)
     # initial shuffled puzzle
     print("initial state : ")
