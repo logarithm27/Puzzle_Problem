@@ -1,5 +1,7 @@
 # !usr/bin/Omar/2019/NxN Puzzle
 import sys
+from Module1 import *
+
 from PyQt5.QtWidgets import *
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QRect, QPropertyAnimation
@@ -32,6 +34,13 @@ class MainWindow():
 
 
 if __name__ == '__main__':
+
+    instance = creerInstanceAleatoire(3)
+    while not estSolvable(instance, 3):
+        instance = creerInstanceAleatoire(3)
+
+
+
     app = QApplication(sys.argv)
     main_window = MainWindow()
     main_window.show()
