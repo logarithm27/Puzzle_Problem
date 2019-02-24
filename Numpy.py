@@ -1,7 +1,5 @@
 import numpy
 
-#Test1
-
 
 def matrix(num_blocks):
     # matrix that takes value from 1 to 10 (10 - 1 = 9 = 3²)
@@ -14,22 +12,15 @@ def matrix(num_blocks):
         numpy.arange(1, max_range).reshape(num_blocks, num_blocks)
     initial_puzzle_state = numpy.arange(1, max_range).reshape(num_blocks, num_blocks)
     # get index of last element
-    index = numpy.where(initial_puzzle_state == max_range-1)[0][0]
-    initial_puzzle_state[index][index] = -1
-    final_puzzle_state[index][index] = -1
+    # argwhere Find the indices of array elements that are non-zero, grouped by element.
+    index = numpy.argwhere(initial_puzzle_state == max_range-1)
+    column_index = index[0][1]
+    line_index = index[0][0]
+    initial_puzzle_state[line_index][column_index] = -1
+    final_puzzle_state[line_index][column_index] = -1
+    # shuffling lines
+    numpy.random.shuffle(initial_puzzle_state)
     # shuffling columns
     for i in range(num_blocks):
         numpy.random.shuffle(initial_puzzle_state[i])
-    # shuffling lines
-    numpy.random.shuffle(initial_puzzle_state)
     yield [initial_puzzle_state, final_puzzle_state]
-
-    # # initial shuffled puzzle
-    # print("initial state : ")
-    # print(initial_puzzle_state)
-    # # final or goal state
-    # print("goal state : ")
-    # print(final_puzzle_state)
-    # # have we reached the final state ? :
-    # print(numpy.array_equal(final_puzzle_state, initial_puzzle_state))
-

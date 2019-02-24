@@ -1,11 +1,12 @@
 from PyQt5 import QtCore, QtWidgets
 from Numpy import matrix
 
-
 class UiForm(object):
+
     def setup_ui(self, form):
         num_blocks = 3
         gaming_block = matrix(num_blocks)
+
         # next access to the values inside generator, 0 is the shuffled matrix,
         # 1 is the goal state or ordered matrix, 2 is the number of blocks
         initial_puzzle_state = next(gaming_block)[0]
@@ -34,7 +35,9 @@ class UiForm(object):
                 button = QtWidgets.QPushButton(form)
                 button.setGeometry(QtCore.QRect(x_coordinate, y_coordinate, width, height))
                 button.setStyleSheet("font: 22pt \"MS Shell Dlg 2\";\n"
-                                        "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 178, 102, 255), stop:0.55 rgba(235, 148, 61, 255), stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(0, 0, 0, 0));")
+                                     "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, "
+                                     "stop:0 rgba(255, 178, 102, 255), stop:0.55 rgba(235, 148, 61, 255), "
+                                     "stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(0, 0, 0, 0));")
                 # the object name of each button is the number generated in the shuffled matrix
                 button.setObjectName(str(j))
                 button.setText(str(j))
@@ -42,6 +45,3 @@ class UiForm(object):
                 if j == -1:
                     button.setVisible(False)
                 self.buttons[y_position].append(button)
-
-
-

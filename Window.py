@@ -6,9 +6,19 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QRect, QPropertyAnimation
 from Ui import UiForm
+import numpy
+from Utility import *
+
+# def convert_from_buttons_to_matrix(blocks):
+#     initial_puzzle_state = [[] for i in range(len(blocks))]
+#     for i, array_of_buttons in enumerate(blocks):
+#         for button in array_of_buttons:
+#             initial_puzzle_state[i].append(int(button.text()))
+#     matrix = numpy.asmatrix(initial_puzzle_state)
+#     return matrix
 
 
-class MainWindow():
+class MainWindow:
     def __init__(self):
         self.main_win = QMainWindow()
         self.ui = UiForm()
@@ -29,7 +39,7 @@ class MainWindow():
         self.anim.setDuration(100)
         # self.anim.setStartValue(QRect(_button.x(), _button.y(), 77, 77))
         self.anim.setEndValue(QRect(x_coordinate, y_coordinate, 77, 77))
-        print('mooving')
+        print('moving')
         self.anim.start()
 
 
@@ -38,8 +48,6 @@ if __name__ == '__main__':
     instance = creerInstanceAleatoire(3)
     while not estSolvable(instance, 3):
         instance = creerInstanceAleatoire(3)
-
-
 
     app = QApplication(sys.argv)
     main_window = MainWindow()
