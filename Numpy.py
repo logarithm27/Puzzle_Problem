@@ -25,4 +25,4 @@ def matrix(num_blocks):
     # shuffling columns
     for i in range(num_blocks):
         numpy.random.shuffle(initial_puzzle_state[i])
-    yield [initial_puzzle_state, final_puzzle_state]
+    return [initial_puzzle_state, final_puzzle_state]
