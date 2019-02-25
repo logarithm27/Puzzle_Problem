@@ -3,11 +3,11 @@ from Utility import *
 import numpy
 import Numpy
 def test():
-    instance = creerInstanceAleatoire(3)
-    instance_to_matrix = numpy.asmatrix(instance)
+    instance = Numpy.matrix(3)[0]
     button = BlankButton()
-    print(instance_to_matrix)
-    button.get_neighbor_buttons_of_blank_button(instance_to_matrix)
+    button.get_neighbor_buttons_of_blank_button(instance)
+    print("Taquin :")
+    print(instance)
     print("Voisins de gauche :")
     print(button.left_neighbors)
     print("Voisins de droite :")
