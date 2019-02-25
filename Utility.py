@@ -43,7 +43,7 @@ class BlankButton:
     # pour avoir les voisins de la case vide du taquin
 
     def get_neighbor_buttons_of_blank_button(self, matrix):
-        # chercher les indices de la case vides
+        # chercher les indices de la case vide
         self.get_button_indices(matrix, -1)
         if self.line_index == 0 or 0 < self.line_index < len(matrix):
             for i in range(self.line_index, len(matrix)-self.line_index):
