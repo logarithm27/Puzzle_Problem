@@ -3,7 +3,7 @@ from Utility import *
 import numpy
 import Numpy
 def test():
-    instance = Numpy.matrix(3)[0]
+    instance = Numpy.matrix(4)[0]
     button = BlankButton()
     button.get_neighbor_buttons_of_blank_button(instance)
     print("Taquin :")
