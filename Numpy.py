@@ -12,17 +12,13 @@ def matrix(num_blocks):
     max_range = numpy.square(num_blocks)+1
     final_puzzle_state = \
         numpy.arange(1, max_range).reshape(num_blocks, num_blocks)
-    initial_puzzle_state = numpy.arange(1, max_range).reshape(num_blocks, num_blocks)
-    # get index of last element
-    # argwhere Find the indices of array elements that are non-zero, grouped by element.
-    index = numpy.argwhere(initial_puzzle_state == max_range-1)
-    column_index = index[0][1]
-    line_index = index[0][0]
-    initial_puzzle_state[line_index][column_index] = -1
-    final_puzzle_state[line_index][column_index] = -1
-    # shuffling lines
+    # creer un tableau d'une seule dimension et remplir entre 1 et n² +1
+    initial_puzzle_state = numpy.arange(1, max_range)
+    # chercher la dernière valeur et remplacer par -1 pour représenter la case vide
+    ind = numpy.argwhere(initial_puzzle_state == max_range - 1)[0][0]
+    initial_puzzle_state[ind] = -1
+    # mélanger les valeurs du tableau aléatoirement
     numpy.random.shuffle(initial_puzzle_state)
-    # shuffling columns
-    for i in range(num_blocks):
-        numpy.random.shuffle(initial_puzzle_state[i])
+    # convertir le tableau d'une dimension en une matrice 
+    initial_puzzle_state = numpy.reshape(initial_puzzle_state, (num_blocks, num_blocks))
     return [initial_puzzle_state, final_puzzle_state]
