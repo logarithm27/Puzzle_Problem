@@ -42,6 +42,7 @@ def estSolvable(taquin, taille):
                 ligne = i
                 colonne = j
     #On réajuste la taille pour correspondre aux listes
+
     taille -= 1
     #On calcul le nombre de déplacements 
     caseVideNombre = (taille - colonne) + (taille - ligne)
