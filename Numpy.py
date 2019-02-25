@@ -15,8 +15,8 @@ def matrix(num_blocks):
     # creer un tableau d'une seule dimension et remplir entre 1 et n² +1
     initial_puzzle_state = numpy.arange(1, max_range)
     # chercher la dernière valeur et remplacer par -1 pour représenter la case vide
-    ind = numpy.argwhere(initial_puzzle_state == max_range - 1)[0][0]
-    initial_puzzle_state[ind] = -1
+    index = numpy.argwhere(initial_puzzle_state == max_range - 1)[0][0]
+    initial_puzzle_state[index] = -1
     # mélanger les valeurs du tableau aléatoirement
     numpy.random.shuffle(initial_puzzle_state)
     # convertir le tableau d'une dimension en une matrice 
