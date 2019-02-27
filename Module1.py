@@ -15,7 +15,7 @@ def creerInstanceAleatoire(taille):
     #On génére une liste de nombre pour remplir le taquin
     listeNombre = [i for i in range (0, taille*taille)]
     #On remplace le premier nombre 0 par -1 pour désigner la case vide
-    listeNombre[0] = -1
+    listeNombre[0] = -1 
     colonne = 0
     ligne = 0
 

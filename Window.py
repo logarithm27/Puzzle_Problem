@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QRect, QPropertyAnimation
 from Ui import UiForm
 import numpy
-from Utility import *
+from Utility import * 
 
 # def convert_from_buttons_to_matrix(blocks):
 #     initial_puzzle_state = [[] for i in range(len(blocks))]

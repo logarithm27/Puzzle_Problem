@@ -47,7 +47,7 @@ class SolutionTaquin(object):
                 print("Eval= ", nvlEvaluation, " et g_E =", nvxEtat.g_E)
                 self.afficherSolution(nvxEtat)
                 pause = input("...")
-                exit(0)
+                exit(0) 
             
         if caseV[0]-1 > -1:
             nvxMatrice = []

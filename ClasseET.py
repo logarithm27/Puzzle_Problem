@@ -6,7 +6,7 @@ class EtatTaquin(object):
         self.matrice = matrice
         self.parent = parent
         self.positionCaseVide = positionCaseVide
-        self.g_E = g_E
+        self.g_E = g_E 
 
 
 
