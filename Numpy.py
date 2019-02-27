@@ -1,6 +1,6 @@
-import numpy
 
-#Test1
+from Utility import *
+import numpy
 
 
 def matrix(num_blocks):
@@ -12,24 +12,13 @@ def matrix(num_blocks):
     max_range = numpy.square(num_blocks)+1
     final_puzzle_state = \
         numpy.arange(1, max_range).reshape(num_blocks, num_blocks)
-    initial_puzzle_state = numpy.arange(1, max_range).reshape(num_blocks, num_blocks)
-    # get index of last element
-    index = numpy.where(initial_puzzle_state == max_range-1)[0][0]
-    initial_puzzle_state[index][index] = -1
-    final_puzzle_state[index][index] = -1
-    # shuffling columns
-    for i in range(num_blocks):
-        numpy.random.shuffle(initial_puzzle_state[i])
-    # shuffling lines
+    # creer un tableau d'une seule dimension et remplir entre 1 et n² +1
+    initial_puzzle_state = numpy.arange(1, max_range)
+    # chercher la dernière valeur et remplacer par -1 pour représenter la case vide
+    index = numpy.argwhere(initial_puzzle_state == max_range - 1)[0][0]
+    initial_puzzle_state[index] = -1
+    # mélanger les valeurs du tableau aléatoirement
     numpy.random.shuffle(initial_puzzle_state)
-    yield [initial_puzzle_state, final_puzzle_state]
-
-    # # initial shuffled puzzle
-    # print("initial state : ")
-    # print(initial_puzzle_state)
-    # # final or goal state
-    # print("goal state : ")
-    # print(final_puzzle_state)
-    # # have we reached the final state ? :
-    # print(numpy.array_equal(final_puzzle_state, initial_puzzle_state))
-
+    # convertir le tableau d'une dimension en une matrice 
+    initial_puzzle_state = numpy.reshape(initial_puzzle_state, (num_blocks, num_blocks))
+    return [initial_puzzle_state, final_puzzle_state]
