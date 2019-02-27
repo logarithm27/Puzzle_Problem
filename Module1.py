@@ -30,7 +30,11 @@ def creerInstanceAleatoire(taille):
         if colonne == taille-1:
             ligne += 1
         colonne = (colonne+1) % taille
-    return taquin
+
+    if estSolvable(taquin, taille):
+        return taquin
+    else:
+        return creerInstanceAleatoire(taille)
 
 #Méthode testant la validité d'une instance de taquin
 def estSolvable(taquin, taille):
@@ -65,7 +69,7 @@ def estSolvable(taquin, taille):
             pass
         else:
             for j, nbr in enumerate(listeTaquin):
-                if nbr == i+1:
+                if nbr == i+1:  
                     listeTaquin[i], listeTaquin[j] = listeTaquin[j], listeTaquin[i]
                     nbrPermutationNecessaire += 1
                     break
@@ -76,7 +80,35 @@ def estSolvable(taquin, taille):
     else:
         nbrPermutationNecessaire = "impair"
 
+
     if nbrPermutationNecessaire == caseVideNombre:
         return True
     else:
         return False
+
+def creerTaquinFinal(taille):
+    taquin = []
+
+    #On remplit la variable avec des 0
+    for i in range(0, taille):
+        ligneType = [0 for i in range (0, taille)]
+        taquin.append(ligneType)
+    #On génére une liste de nombre pour remplir le taquin
+    listeNombre = [i for i in range (1, taille*taille)]
+    #On remplace le premier nombre 0 par -1 pour désigner la case vide
+    listeNombre.append(-1)
+    colonne = 0
+    ligne = 0
+    #Boucle pour remplir le taquin
+    for i in range(taille*taille, 0, -1):
+        #On rajoute les nombres dans l'ordre dans le taquin
+        taquin[ligne][colonne] = listeNombre[0]
+        #On l'enlève de la liste de nombre aléatoire
+        listeNombre.pop(0)
+        if colonne == taille-1:
+            ligne += 1
+        colonne = (colonne+1) % taille
+    return taquin
+
+
+            
