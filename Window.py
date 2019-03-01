@@ -47,13 +47,19 @@ class MainWindow:
 
 if __name__ == '__main__':
 
-    taquin = SolutionTaquin(3, 6)
-    taquin.initialiser()
+    
+    taille = input("Donnez la taille du taquin: ")
+    taille = int(taille)
+    heuristique = input("Donnez l'heuristique: ")
+    heuristique = int(heuristique)
+
+    taquin = SolutionTaquin(taille, heuristique)
+    taquin.initialiser(heuristique, taille)
 
     while 1:
         listeEtat = taquin.frontiere.popitem(0)
         for etat in listeEtat[1]:
-            taquin.expanser(etat, listeEtat[0], 6)
+            taquin.expanser(etat, listeEtat[0], heuristique, taille)
 
     instance = creerInstanceAleatoire(3)
     while not estSolvable(instance, 3):

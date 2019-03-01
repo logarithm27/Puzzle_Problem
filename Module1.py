@@ -38,7 +38,7 @@ def creerInstanceAleatoire(taille):
 
 #Méthode testant la validité d'une instance de taquin
 def estSolvable(taquin, taille):
-
+   
     #On commence par rechercher la position de la case vide
     for i, liste in enumerate(taquin):
         for j, nbr in enumerate(liste):
@@ -70,7 +70,7 @@ def estSolvable(taquin, taille):
             pass
         else:
             for j, nbr in enumerate(listeTaquin):
-                if nbr == i+1:  
+                if nbr == i+1:   
                     listeTaquin[i], listeTaquin[j] = listeTaquin[j], listeTaquin[i]
                     nbrPermutationNecessaire += 1
                     break
