@@ -7,7 +7,7 @@ import timeit
 from hashlib import *
 
 def test():
-    instance = matrix(5)
+    instance = matrix(3)
     print(instance)
     button = Utility()
     button.get_neighbor_buttons_of_blank_button(instance)
@@ -24,7 +24,7 @@ def test():
     print("tout les voisins :")
     for i in button.all_neighbors:
         print(i)
-
+    print(generate_goal_state(len(instance)))
     # indices_initial_state = get_indices_of_elements(instance[0])
     # indices_final_state = get_indices_of_elements(matrix(3)[1])
     # for element in indices_initial_state:
@@ -37,6 +37,9 @@ def test():
     #     print(i)
 
     # print(instance[2])
+    # a = str(instance)
+    # # a = numpy.fromstring(a, dtype=int, sep=' ')
+    # print(a)
 
 print("executed in : ", timeit.timeit(test, number = 1))
 

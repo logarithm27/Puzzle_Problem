@@ -17,7 +17,7 @@ def matrix(num_blocks):
     while not solvable(initial_puzzle_state):
         numpy.random.shuffle(initial_puzzle_state)
     # chercher la dernière valeur et remplacer par -1 pour représenter la case vide
-    numpy.place(initial_puzzle_state, initial_puzzle_state == max_range - 1, -1)
+    numpy.place(initial_puzzle_state, initial_puzzle_state == max_range - 1, 0)
     # convertir le tableau d'une dimension en une matrice
     initial_puzzle_state = numpy.reshape(initial_puzzle_state, (num_blocks, num_blocks))
     return initial_puzzle_state
@@ -91,7 +91,7 @@ def count_misplaced_blocks(current_state):
 def generate_goal_state(length):
     goal_state = numpy.arange(1, numpy.square(length)+1)
     goal_state = numpy.reshape(goal_state, (length, length))
-    numpy.place(goal_state, goal_state == numpy.square(length), -1)
+    numpy.place(goal_state, goal_state == numpy.square(length), 0)
     return goal_state
 
 
@@ -113,3 +113,10 @@ def manhattan_distance_conditions_2(current_state_indices, goal_state_indices, k
         manhattan_distance += (goal_state_indices[key_number][h_v_value] - current_state_indices[key_number][h_v_value])
     return manhattan_distance
 
+
+def from_matrix_to_number(block):
+    matrix_as_unique_number = ''
+    for line in block:
+        for column in line:
+            matrix_as_unique_number += str(column)
+    return int(matrix_as_unique_number)

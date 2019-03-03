@@ -64,38 +64,37 @@ class MainWindow:
 
 if __name__ == '__main__':
 
-<<<<<<< Updated upstream
-
-    taille = input("Donnez la taille du taquin: ")
-    taille = int(taille)
-    heuristique = input("Donnez l'heuristique: ")
-    heuristique = int(heuristique)
-
-    taquin = SolutionTaquin(taille, heuristique)
-    taquin.initialiser(heuristique, taille)
-
-    while 1:
-        listeEtat = taquin.frontiere.popitem(0)
-        for etat in listeEtat[1]:
-            taquin.expanser(etat, listeEtat[0], heuristique, taille)
-
-    instance = creerInstanceAleatoire(3)
-    while not estSolvable(instance, 3):
-        instance = creerInstanceAleatoire(3)
-=======
-    # taquin = SolutionTaquin(3, 6)
-    # taquin.initialiser()
-    #
-    # while 1:
-    #     listeEtat = taquin.frontiere.popitem(0)
-    #     for etat in listeEtat[1]:
-    #         taquin.expanser(etat, listeEtat[0], 6)
-    #
-    # instance = creerInstanceAleatoire(3)
-    # while not estSolvable(instance, 3):
-    #     instance = creerInstanceAleatoire(3)
->>>>>>> Stashed changes
-
+# <<<<<<< Updated upstream
+#
+#     taille = input("Donnez la taille du taquin: ")
+#     taille = int(taille)
+#     heuristique = input("Donnez l'heuristique: ")
+#     heuristique = int(heuristique)
+#
+#     taquin = SolutionTaquin(taille, heuristique)
+#     taquin.initialiser(heuristique, taille)
+#
+#     while 1:
+#         listeEtat = taquin.frontiere.popitem(0)
+#         for etat in listeEtat[1]:
+#             taquin.expanser(etat, listeEtat[0], heuristique, taille)
+#
+#     instance = creerInstanceAleatoire(3)
+#     while not estSolvable(instance, 3):
+#         instance = creerInstanceAleatoire(3)
+# =======
+#     # taquin = SolutionTaquin(3, 6)
+#     # taquin.initialiser()
+#     #
+#     # while 1:
+#     #     listeEtat = taquin.frontiere.popitem(0)
+#     #     for etat in listeEtat[1]:
+#     #         taquin.expanser(etat, listeEtat[0], 6)
+#     #
+#     # instance = creerInstanceAleatoire(3)
+#     # while not estSolvable(instance, 3):
+#     #     instance = creerInstanceAleatoire(3)
+# >>>>>>> Stashed changes
     app = QApplication(sys.argv)
     main_window = MainWindow()
     main_window.show()

@@ -43,6 +43,6 @@ class UiForm(object):
                 button.setText(str(j))
 
                 # hide the last element (last element should be the empty square)
-                if j == -1:
+                if j == 0:
                     button.setVisible(False)
                 self.buttons[y_position].append(button)

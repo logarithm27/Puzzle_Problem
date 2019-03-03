@@ -44,7 +44,7 @@ class Utility:
     # get the indices on the matrix of the blank button
 
     def get_blank_button_indices(self, matrix):
-        index = numpy.argwhere(matrix == -1)
+        index = numpy.argwhere(matrix == 0)
         self.line_index_blank_button = index[0][0]
         self.column_index_blank_button = index[0][1]
 
@@ -74,7 +74,7 @@ class Utility:
         # self.get_blank_button_coordinates(self.matrix, blocks)
         if self.line_index_blank_button == 0 or 0 < self.line_index_blank_button < len(self.matrix):
             for i in range(self.line_index_blank_button, len(self.matrix), 1):
-                if self.matrix[i][self.column_index_blank_button] == -1:
+                if self.matrix[i][self.column_index_blank_button] == 0:
                     continue
                 self.down_neighbors.append(self.matrix[i][self.column_index_blank_button])
                 if self.down_neighbors:
@@ -95,11 +95,13 @@ class Utility:
                 self.all_neighbors.append(self.left_neighbor)
         if self.line_index_blank_button == len(self.matrix) - 1 or 0 < self.line_index_blank_button < len(self.matrix):
             for i in range(self.line_index_blank_button, -1, -1):
-                if self.matrix[i][self.column_index_blank_button] == -1:
+                if self.matrix[i][self.column_index_blank_button] == 0:
                     continue
                 self.up_neighbors.append(self.matrix[i][self.column_index_blank_button])
                 if self.up_neighbors:
                     self.up_neighbor = self.up_neighbors[0]
                     self.all_neighbors.append(self.up_neighbor)
                 break
+
+
 
