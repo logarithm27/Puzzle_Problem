@@ -34,11 +34,7 @@ class ASearch:
             self.possible_next_states.append(state)
         current_state_to_number = from_matrix_to_number(current_state)
         self.matrix_to_number[current_state_to_number] = current_state
-        print("possible moves")
-        for i in self.possible_next_states:
-            print(i.state)
-            print(i.h_function)
-        # return self.possible_next_states
+        return self.possible_next_states
 
     def test(self):
         print(self.current_state)

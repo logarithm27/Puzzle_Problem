@@ -40,10 +40,6 @@ def test():
     # a = str(instance)
     # # a = numpy.fromstring(a, dtype=int, sep=' ')
     # print(a)
-    a = move(instance, 5)
-    # b = move(instance, 4)
-    print(a)
-    # print(b)
 
 print("executed in : ", timeit.timeit(test, number = 1))
 
