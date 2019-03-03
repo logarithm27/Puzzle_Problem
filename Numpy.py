@@ -120,3 +120,10 @@ def from_matrix_to_number(block):
         for column in line:
             matrix_as_unique_number += str(column)
     return int(matrix_as_unique_number)
+
+
+def move(new_state, down_up_left_right_value):
+    numpy.place(new_state, new_state == down_up_left_right_value, -2)
+    numpy.place(new_state, new_state == 0, down_up_left_right_value)
+    numpy.place(new_state, new_state == -2, 0)
+    return new_state

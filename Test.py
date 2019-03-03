@@ -24,7 +24,7 @@ def test():
     print("tout les voisins :")
     for i in button.all_neighbors:
         print(i)
-    print(generate_goal_state(len(instance)))
+    # print(generate_goal_state(len(instance)))
     # indices_initial_state = get_indices_of_elements(instance[0])
     # indices_final_state = get_indices_of_elements(matrix(3)[1])
     # for element in indices_initial_state:
@@ -40,6 +40,10 @@ def test():
     # a = str(instance)
     # # a = numpy.fromstring(a, dtype=int, sep=' ')
     # print(a)
+    a = move(instance, 5)
+    # b = move(instance, 4)
+    print(a)
+    # print(b)
 
 print("executed in : ", timeit.timeit(test, number = 1))
 
