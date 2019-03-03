@@ -41,6 +41,7 @@ class UiForm(object):
                 # the object name of each button is the number generated in the shuffled matrix
                 button.setObjectName(str(j))
                 button.setText(str(j))
+
                 # hide the last element (last element should be the empty square)
                 if j == -1:
                     button.setVisible(False)
