@@ -9,7 +9,7 @@ class UiForm(object):
 
         # next access to the values inside generator, 0 is the shuffled matrix,
         # 1 is the goal state or ordered matrix, 2 is the number of blocks
-        initial_puzzle_state = gaming_block[0]
+        initial_puzzle_state = gaming_block
         form.setObjectName("Puzzle Game AI")
         form.setWindowTitle("Puzzle Game AI")
         # width and height of each button ( or block )

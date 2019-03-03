@@ -16,6 +16,11 @@ class Utility:
         self.column_index = 0
         self.line_index = 0
         self.blank_button = None
+        self.left_neighbor = None
+        self.up_neighbor = None
+        self.right_neighbor = None
+        self.down_neighbor = None
+        self.all_neighbors = []
     # convert graphical buttons to a matrix
 
     def convert_from_buttons_to_matrix(self, blocks):
@@ -61,10 +66,10 @@ class Utility:
         return blocks
     # pour avoir les voisins de la case vide du taquin
 
-    def get_neighbor_buttons_of_blank_button(self, blocks):
+    def get_neighbor_buttons_of_blank_button(self, block):
         # chercher les indices de la case vide
         # self.convert_from_buttons_to_matrix(blocks)
-        self.matrix = blocks
+        self.matrix = block
         self.get_blank_button_indices(self.matrix)
         # self.get_blank_button_coordinates(self.matrix, blocks)
         if self.line_index_blank_button == 0 or 0 < self.line_index_blank_button < len(self.matrix):
@@ -72,13 +77,29 @@ class Utility:
                 if self.matrix[i][self.column_index_blank_button] == -1:
                     continue
                 self.down_neighbors.append(self.matrix[i][self.column_index_blank_button])
+                if self.down_neighbors:
+                    self.down_neighbor = self.down_neighbors[0]
+                    self.all_neighbors.append(self.down_neighbor)
+                break
         if self.column_index_blank_button == 0 or 0 < self.column_index_blank_button < len(self.matrix):
             self.right_neighbors = self.matrix[self.line_index_blank_button][self.column_index_blank_button + 1::]
-        if 0 < self.column_index_blank_button < len(self.matrix) or self.column_index_blank_button == len(self.matrix) - 1:
+            self.right_neighbors = self.right_neighbors.tolist()
+            if self.right_neighbors:
+                self.right_neighbor = self.right_neighbors[0]
+                self.all_neighbors.append(self.right_neighbor)
+        if 0 < self.column_index_blank_button < len(self.matrix) or self.column_index_blank_button == len(self.matrix) -1:
             self.left_neighbors = self.matrix[self.line_index_blank_button][self.column_index_blank_button - 1::-1]
+            self.left_neighbors = self.left_neighbors.tolist()
+            if self.left_neighbors:
+                self.left_neighbor = self.left_neighbors[0]
+                self.all_neighbors.append(self.left_neighbor)
         if self.line_index_blank_button == len(self.matrix) - 1 or 0 < self.line_index_blank_button < len(self.matrix):
             for i in range(self.line_index_blank_button, -1, -1):
                 if self.matrix[i][self.column_index_blank_button] == -1:
                     continue
                 self.up_neighbors.append(self.matrix[i][self.column_index_blank_button])
+                if self.up_neighbors:
+                    self.up_neighbor = self.up_neighbors[0]
+                    self.all_neighbors.append(self.up_neighbor)
+                break
 
