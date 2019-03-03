@@ -9,7 +9,10 @@ class SolutionTaquin(object):
         self.taquinFinal = creerTaquinFinal(taille)
         self.explorer = {}
         self.frontiere = SortedDict()
-        self.tabPonderation = [[36, 12, 12, 4, 1, 1, 4, 1, 0], [8, 7, 6, 5, 4, 3, 2, 1, 0], [8, 7, 6, 5, 3, 2, 4, 1, 0], [1, 1, 1, 1, 1, 1, 1, 1, 1]]
+        self.tabPonderation = [[36, 12, 12, 4, 1, 1, 4, 1, 0],
+                               [8, 7, 6, 5, 4, 3, 2, 1, 0],
+                               [8, 7, 6, 5, 3, 2, 4, 1, 0],
+                               [1, 1, 1, 1, 1, 1, 1, 1, 1]]
         self.heuristique = heuristique
 
     def initialiser(self):

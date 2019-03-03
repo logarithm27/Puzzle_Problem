@@ -41,5 +41,7 @@ def test():
     # # a = numpy.fromstring(a, dtype=int, sep=' ')
     # print(a)
 
+    print(numpy.allclose(instance, instance))
+
 print("executed in : ", timeit.timeit(test, number = 1))
 
