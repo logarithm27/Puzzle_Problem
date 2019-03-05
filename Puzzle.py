@@ -28,7 +28,7 @@ class Puzzle:
             for action, (line, column) in direcs.items():
                 if line >= 0 and column >= 0 and line < self.width and column < self.width and \
                         self.current_state[line][column] == 0:
-                    move = create_move((line_index,column_index), (line, column)), action
+                    move = create_move((line_index, column_index), (line, column)), action
                     moves.append(move)
         return moves
 
@@ -54,6 +54,7 @@ class Puzzle:
             print(row)
         print()
 
+    # hashing the current state
     def __str__(self):
         return ''.join(map(str, self))
 
