@@ -8,6 +8,8 @@ class Play:
 
     def play(self):
         expansed = 0
+        visited = 0
+        moves = []
         frontier = collections.deque([Node(self.current_state)])
         explored = set()
         explored.add(frontier[0].state)
@@ -16,13 +18,15 @@ class Play:
             frontier = collections.deque(sorted(list(frontier), key=lambda node: node.a_search))
             node = frontier.popleft()
             if node.solved:
-                return [node.path, expansed]
+                return [node.path, expansed, visited]
             for move, action in node.actions:
                 child = Node(move(), node, action)
+                visited += 1
                 if child.state not in explored:
                     frontier.appendleft(child)
                     explored.add(child.state)
                     expansed += 1
+
 
 
 

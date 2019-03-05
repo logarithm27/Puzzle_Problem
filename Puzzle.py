@@ -7,16 +7,17 @@ class Puzzle:
     def __init__(self, current_state):
         self.width = len(current_state[0])
         self.current_state = current_state
+
     @property
     def solved(self):
         puzzle_length = self.width * self.width
         return str(self) == ''.join(map(str, range(1, puzzle_length))) + '0'
 
+    def create_move(self, at, to):
+        return lambda: self._move(at, to)
+
     @property
     def actions(self):
-        def create_move(at, to):
-            return lambda: self._move(at, to)
-
         moves = []
         for line_index, column_index in itertools.product(range(self.width),
                                       range(self.width)):
@@ -28,7 +29,7 @@ class Puzzle:
             for action, (line, column) in direcs.items():
                 if line >= 0 and column >= 0 and line < self.width and column < self.width and \
                         self.current_state[line][column] == 0:
-                    move = create_move((line_index, column_index), (line, column)), action
+                    move = self.create_move((line_index, column_index), (line, column)), action
                     moves.append(move)
         return moves
 

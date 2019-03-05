@@ -78,8 +78,8 @@ def test():
         steps += 1
 
     print("Total number of steps : " + str(steps))
-    print("expansed : " + str(p[1]))
-
+    print("expansed states : " + str(p[1]))
+    print("visited states " + str(p[2]))
 
 if __name__ == '__main__':
     print("executed in : ", timeit.timeit(test, number = 1))
