@@ -21,11 +21,11 @@ class Node:
 
     @property
     def path(self):
-        node, parents = self, []
+        node, node_is_parent_of = self, []
         while node:
-            parents.append(node)
+            node_is_parent_of.append(node)
             node = node.parent
-        yield from reversed(parents)
+        yield from reversed(node_is_parent_of)
 
     @property
     def solved(self):
