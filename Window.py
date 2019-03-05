@@ -2,8 +2,10 @@
 import sys
 from Module1 import *
 from ClasseST import *
-
-
+import timeit
+from Puzzle import *
+from Node import *
+from Play import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QRect, QPropertyAnimation
@@ -62,36 +64,56 @@ class MainWindow:
         self.anim2.start()
     # print(y == self.blocks)
 
+
+def test():
+    instance = matrix(3)
+    puzzle = Puzzle(instance)
+    s = Play(puzzle)
+    p = s.play()
+
+    steps = 0
+    for node in p:
+        print(node.action)
+        node.current_state.print_state()
+        steps += 1
+
+    print("Total number of steps: " + str(steps))
+
+
 if __name__ == '__main__':
+    print("executed in : ", timeit.timeit(test, number = 1))
 
 
-    taille = input("Donnez la taille du taquin: ")
-    taille = int(taille)
-    heuristique = input("Donnez l'heuristique: ")
-    heuristique = int(heuristique)
 
-    taquin = SolutionTaquin(taille, heuristique)
-    taquin.initialiser(heuristique, taille)
 
-    while 1:
-        listeEtat = taquin.frontiere.popitem(0)
-        for etat in listeEtat[1]:
-            taquin.expanser(etat, listeEtat[0], heuristique, taille)
 
-    instance = creerInstanceAleatoire(3)
-    while not estSolvable(instance, 3):
-        instance = creerInstanceAleatoire(3)
-    taquin = SolutionTaquin(3, 6)
-    taquin.initialiser()
-
-    while 1:
-        listeEtat = taquin.frontiere.popitem(0)
-        for etat in listeEtat[1]:
-            taquin.expanser(etat, listeEtat[0], 6)
-
-    instance = creerInstanceAleatoire(3)
-    while not estSolvable(instance, 3):
-        instance = creerInstanceAleatoire(3)
+# taille = input("Donnez la taille du taquin: ")
+    # taille = int(taille)
+    # heuristique = input("Donnez l'heuristique: ")
+    # heuristique = int(heuristique)
+    #
+    # taquin = SolutionTaquin(taille, heuristique)
+    # taquin.initialiser(heuristique, taille)
+    #
+    # while 1:
+    #     listeEtat = taquin.frontiere.popitem(0)
+    #     for etat in listeEtat[1]:
+    #         taquin.expanser(etat, listeEtat[0], heuristique, taille)
+    #
+    # instance = creerInstanceAleatoire(3)
+    # while not estSolvable(instance, 3):
+    #     instance = creerInstanceAleatoire(3)
+    # taquin = SolutionTaquin(3, 6)
+    # taquin.initialiser()
+    #
+    # while 1:
+    #     listeEtat = taquin.frontiere.popitem(0)
+    #     for etat in listeEtat[1]:
+    #         taquin.expanser(etat, listeEtat[0], 6)
+    #
+    # instance = creerInstanceAleatoire(3)
+    # while not estSolvable(instance, 3):
+    #     instance = creerInstanceAleatoire(3)
 
     # app = QApplication(sys.argv)
     # main_window = MainWindow()
