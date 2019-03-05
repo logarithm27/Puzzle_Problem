@@ -1,5 +1,9 @@
 # !usr/bin/Omar/2019/NxN Puzzle
 import sys
+import threading
+import time
+from time import sleep
+
 from Module1 import *
 from ClasseST import *
 import timeit
@@ -24,65 +28,78 @@ from PyQt5 import QtCore, QtWidgets
 
 
 class MainWindow:
-    def __init__(self):
+    def __init__(self, instance):
+        self.instance = instance
+        print("solved in : ", timeit.timeit(lambda : self.play_game(), number=1))
+        print("expansed states : " + str(self.play[1]))
+        print("visited states " + str(self.play[2]))
+        print("click on play button ")
         self.main_win = QMainWindow()
         self.ui = UiForm()
-        self.ui.setup_ui(self.main_win)
+        self.ui.setup_ui(self.main_win, self.instance)
         self.main_win.setStyleSheet("background-color: rgb(178, 222, 124)")
         self.main_win.setFixedSize(self.main_win.width(), self.main_win.height())
         self.blocks = self.ui.buttons
         self.utility = Utility()
         # TO DO : functions slot to animate the block's move
-        self.blocks[0][0].clicked.connect(lambda: self.on_button_click())
+        self.node = []
+        for i, node in enumerate(self.play[0]):
+            if i == 0:
+                continue
+            self.node.append(node)
+        self.ui.start_button.clicked.connect(lambda: self.on_button_click())
+
         # self.utility.blank_button.clicked.connect(lambda: self.on_button_click(self.utility.blank_button))
+
+    def play_game(self):
+        self.puzzle = Puzzle(self.instance)
+        self.state = Play(self.puzzle)
+        self.play = self.state.play()
 
     def show(self):
         self.main_win.show()
 
-    # TO DO : animate button's move
-
     def on_button_click(self):
-        print("click")
-        self.utility.get_neighbor_buttons_of_blank_button(self.blocks)
-        y = self.blocks
-        for i in self.blocks:
-            for j in i:
-                print(j.text(), j.x(), j.y())
-        neighbor = self.utility.down_neighbors.pop(0)
-        x_neighbor = neighbor.x()
-        y_neighbor = neighbor.y()
-        self.anim = QPropertyAnimation(neighbor, b"geometry")
-        self.anim.setDuration(100)
-        self.blocks = self.utility.permute_buttons(self.utility.blank_button, neighbor, self.blocks)
-        self.anim.setStartValue(QRect(neighbor.x(), neighbor.y(), 77, 77))
-        self.anim.setEndValue(QRect(self.utility.blank_button.x(), self.utility.blank_button.y(), 77, 77))
-        self.anim.start()
-        print('moving')
-        self.anim2 = QPropertyAnimation(self.utility.blank_button, b"geometry")
-        self.anim2.setStartValue(QRect(self.utility.blank_button.x(), self.utility.blank_button.y(), 77, 77))
-        self.anim2.setEndValue(QRect(x_neighbor, y_neighbor, 77, 77))
-        self.anim2.start()
-    # print(y == self.blocks)
+        self.move()
 
+    def move(self):
+        if self.node:
+            from_ = self.node[0].from_
+            get_button = self.utility.function(from_, self.blocks)
+            get_blank_button = self.utility.function(0, self.blocks)
+            x_neighbor = get_button.x()
+            y_neighbor = get_button.y()
+            self.anim = QPropertyAnimation(get_button, b"geometry")
+            self.anim.setDuration(100)
+            self.anim.setStartValue(QRect(get_button.x(), get_button.y(), 77, 77))
+            self.anim.setEndValue(QRect(get_blank_button.x(), get_blank_button.y(), 77, 77))
+            self.anim.start()
+            self.anim2 = QPropertyAnimation(get_blank_button, b"geometry")
+            self.anim2.setStartValue(QRect(get_blank_button.x(), get_blank_button.y(), 77, 77))
+            self.anim2.setEndValue(QRect(x_neighbor, y_neighbor, 77, 77))
+            self.anim2.start()
+            self.blocks = self.utility.permute_buttons(get_blank_button, get_button, self.blocks)
+            print(str(from_) + str(self.node[0].action))
+            print(self.node[0].current_state.print_state())
+            self.node.pop(0)
 
-def test():
-    instance = matrix(3)
-    puzzle = Puzzle(instance)
-    s = Play(puzzle)
-    p = s.play()
-
-    steps = 0
-    for node in p[0]:
-        print(str(node.from_) + str(node.action))
-        node.current_state.print_state()
-        steps += 1
-
-    print("Total number of steps : " + str(steps))
-    print("expansed states : " + str(p[1]))
-    print("visited states " + str(p[2]))
-
+#     instance = matrix(3)
+#     puzzle = Puzzle(instance)
+#     state = Play(puzzle)
+#     play = state.play()
+#
+#     steps = 0
+#     for node in play[0]:
+#         print(str(node.from_) + str(node.action))
+#         node.current_state.print_state()
+#         steps += 1
+#
+#     print("Total number of steps : " + str(steps))
+#     print("expansed states : " + str(play[1]))
+#     print("visited states " + str(play[2]))
+#
 if __name__ == '__main__':
-    print("executed in : ", timeit.timeit(test, number = 1))
+#     print("executed in : ", timeit.timeit(test, number = 1))
 
 
 
@@ -116,7 +133,7 @@ if __name__ == '__main__':
     # while not estSolvable(instance, 3):
     #     instance = creerInstanceAleatoire(3)
 
-    # app = QApplication(sys.argv)
-    # main_window = MainWindow()
-    # main_window.show()
-    # sys.exit(app.exec_())
+    app = QApplication(sys.argv)
+    main_window = MainWindow(matrix(3))
+    main_window.show()
+    sys.exit(app.exec_())
