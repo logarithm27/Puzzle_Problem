@@ -83,27 +83,8 @@ class MainWindow:
             print(self.node[0].current_state.print_state())
             self.node.pop(0)
 
-#     instance = matrix(3)
-#     puzzle = Puzzle(instance)
-#     state = Play(puzzle)
-#     play = state.play()
-#
-#     steps = 0
-#     for node in play[0]:
-#         print(str(node.from_) + str(node.action))
-#         node.current_state.print_state()
-#         steps += 1
-#
-#     print("Total number of steps : " + str(steps))
-#     print("expansed states : " + str(play[1]))
-#     print("visited states " + str(play[2]))
-#
+
 if __name__ == '__main__':
-#     print("executed in : ", timeit.timeit(test, number = 1))
-
-
-
-
 
 # taille = input("Donnez la taille du taquin: ")
     # taille = int(taille)
