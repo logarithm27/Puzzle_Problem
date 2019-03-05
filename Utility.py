@@ -54,16 +54,20 @@ class Utility:
         self.column_index = index[0][1]
 
     def permute_buttons(self, button_1, button_2, blocks):
-        self.get_button_indices(self.matrix, button_1.text())
-        line_index_1 = self.line_index
-        column_index_1 = self.column_index
-        self.get_button_indices(self.matrix, button_2.text())
-        line_index_2 = self.line_index
-        column_index_2 = self.column_index
-        buff = blocks[line_index_2][column_index_2]
-        blocks[line_index_2][column_index_2] = blocks[line_index_1][column_index_1]
-        blocks[line_index_1][column_index_1] = buff
+        line_ind_1, column_ind_1, line_ind_2, column_ind_2 = 0, 0, 0, 0
+        for line_index, line in enumerate(blocks):
+            for column_index, column in enumerate(line):
+                if column == button_1:
+                    line_ind_1, column_ind_1 = line_index, column_index
+        for line_index, line in enumerate(blocks):
+            for column_index, column in enumerate(line):
+                if column == button_2:
+                    line_ind_2, column_ind_2 = line_index, column_index
+        buff = blocks[line_ind_2][column_ind_2]
+        blocks[line_ind_2][column_ind_2] = blocks[line_ind_1][column_ind_1]
+        blocks[line_ind_1][column_ind_1] = buff
         return blocks
+
     # pour avoir les voisins de la case vide du taquin
 
     def get_neighbor_buttons_of_blank_button(self, block):
@@ -103,5 +107,9 @@ class Utility:
                     self.all_neighbors.append(self.up_neighbor)
                 break
 
-
+    def function(self, from_, buttons):
+        for line_index, line in enumerate(buttons):
+            for column_index, column in enumerate(line):
+                if column.text() == str(from_):
+                    return buttons[line_index][column_index]
 

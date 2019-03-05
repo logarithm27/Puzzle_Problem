@@ -3,9 +3,9 @@ from Numpy import matrix
 
 class UiForm(object):
 
-    def setup_ui(self, form):
-        num_blocks = 3
-        gaming_block = matrix(num_blocks)
+    def setup_ui(self, form, block):
+        num_blocks = len(block)
+        gaming_block = block
 
         # next access to the values inside generator, 0 is the shuffled matrix,
         # 1 is the goal state or ordered matrix, 2 is the number of blocks
@@ -17,7 +17,7 @@ class UiForm(object):
         height = 77
         # limit the window's size to the number of blocks
         # i.e : 77 * 3 = 231 ==> we'll have a windows of 231px x 231px
-        form.resize(width * num_blocks, width * num_blocks)
+        form.resize(width * num_blocks, width * num_blocks + 40)
         # initialize matrix of buttons similar to the shuffled matrix
         self.buttons = [[] for i in range(num_blocks)]
         y_coordinate = 0
@@ -46,3 +46,14 @@ class UiForm(object):
                 if j == 0:
                     button.setVisible(False)
                 self.buttons[y_position].append(button)
+
+        self.start_button = QtWidgets.QPushButton(form)
+        self.start_button.setGeometry(QtCore.QRect(70,240, 100, 28))
+        self.start_button.setStyleSheet("font: 22pt \"MS Shell Dlg 2\";\n"
+                                        "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, "
+                                        "stop:0 rgba(255, 178, 102, 255), stop:0.55 rgba(235, 148, 61, 255), "
+                                        "stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(0, 0, 0, 0));")
+        self.start_button.setObjectName('Move')
+        self.start_button.setText('Play')
+
+

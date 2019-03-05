@@ -9,7 +9,6 @@ class Play:
     def play(self):
         expansed = 0
         visited = 0
-        moves = []
         frontier = collections.deque([Node(self.current_state)])
         explored = set()
         explored.add(frontier[0].state)

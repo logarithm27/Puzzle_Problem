@@ -54,7 +54,13 @@ class Puzzle:
     def print_state(self):
         for row in self.current_state:
             print(row)
-        print()
+
+
+    def get_state(self):
+        state = []
+        for row in self.current_state:
+            state.append(row)
+        return state
 
     # hashing the current state
     def __str__(self):
