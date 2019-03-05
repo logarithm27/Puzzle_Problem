@@ -12,6 +12,7 @@ class Play:
         explored = set()
         explored.add(frontier[0].state)
         while frontier:
+            # sort the frontier by the cheapest value of a_search = f = value of g + h(n) = manhattan + misplaced
             frontier = collections.deque(sorted(list(frontier), key=lambda node: node.a_search))
             node = frontier.popleft()
             if node.solved:
