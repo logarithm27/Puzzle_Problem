@@ -1,4 +1,6 @@
 from Module1 import *
+from Play import Play
+from Puzzle import Puzzle
 from Utility import *
 import numpy
 from Numpy import *
@@ -8,22 +10,22 @@ from hashlib import *
 
 def test():
     instance = matrix(3)
-    print(instance)
-    button = Utility()
-    button.get_neighbor_buttons_of_blank_button(instance)
-    print("Taquin :")
-    print(instance)
-    print("Voisin de gauche :")
-    print(button.left_neighbor)
-    print("Voisin de droite :")
-    print(button.right_neighbor)
-    print("Voisin du haut:")
-    print(button.up_neighbor)
-    print("Voisin du bas :")
-    print(button.down_neighbor)
-    print("tout les voisins :")
-    for i in button.all_neighbors:
-        print(i)
+    # print(instance)
+    # button = Utility()
+    # button.get_neighbor_buttons_of_blank_button(instance)
+    # print("Taquin :")
+    # print(instance)
+    # print("Voisin de gauche :")
+    # print(button.left_neighbor)
+    # print("Voisin de droite :")
+    # print(button.right_neighbor)
+    # print("Voisin du haut:")
+    # print(button.up_neighbor)
+    # print("Voisin du bas :")
+    # print(button.down_neighbor)
+    # print("tout les voisins :")
+    # for i in button.all_neighbors:
+    #     print(i)
     # print(generate_goal_state(len(instance)))
     # indices_initial_state = get_indices_of_elements(instance[0])
     # indices_final_state = get_indices_of_elements(matrix(3)[1])
@@ -40,8 +42,4 @@ def test():
     # a = str(instance)
     # # a = numpy.fromstring(a, dtype=int, sep=' ')
     # print(a)
-
-    print(numpy.allclose(instance, instance))
-
-print("executed in : ", timeit.timeit(test, number = 1))
 

@@ -72,12 +72,13 @@ def test():
     p = s.play()
 
     steps = 0
-    for node in p:
+    for node in p[0]:
         print(node.action)
         node.current_state.print_state()
         steps += 1
 
     print("Total number of steps: " + str(steps))
+    print("expansed : " + str(p[1]))
 
 
 if __name__ == '__main__':
