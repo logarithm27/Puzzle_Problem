@@ -21,15 +21,16 @@ class Puzzle:
         moves = []
         for line_index, column_index in itertools.product(range(self.width),
                                       range(self.width)):
-            direcs = {'Right Move': (line_index, column_index-1),
-                      'Left Move': (line_index, column_index+1),
-                      'Down Move': (line_index-1, column_index),
-                      'Up Move': (line_index+1, column_index)}
+            direcs = {' moved Left \u2190': (line_index, column_index-1),
+                      ' moved Right \u2192': (line_index, column_index+1),
+                      ' moved Up \u2191': (line_index-1, column_index),
+                      ' moved Down \u2193': (line_index+1, column_index)}
 
             for action, (line, column) in direcs.items():
                 if line >= 0 and column >= 0 and line < self.width and column < self.width and \
                         self.current_state[line][column] == 0:
-                    move = self.create_move((line_index, column_index), (line, column)), action
+                    move = self.create_move((line_index, column_index), (line, column)), action, \
+                           str(self.current_state[line_index][column_index])
                     moves.append(move)
         return moves
 

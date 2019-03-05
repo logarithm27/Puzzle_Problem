@@ -73,7 +73,7 @@ def test():
 
     steps = 0
     for node in p[0]:
-        print(node.action)
+        print(str(node.from_) + str(node.action))
         node.current_state.print_state()
         steps += 1
 

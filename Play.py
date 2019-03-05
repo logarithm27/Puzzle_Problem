@@ -19,8 +19,8 @@ class Play:
             node = frontier.popleft()
             if node.solved:
                 return [node.path, expansed, visited]
-            for move, action in node.actions:
-                child = Node(move(), node, action)
+            for move, action, from_to in node.actions:
+                child = Node(move(), node, action, from_to)
                 visited += 1
                 if child.state not in explored:
                     frontier.appendleft(child)

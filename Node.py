@@ -2,10 +2,11 @@ from Puzzle import *
 
 
 class Node:
-    def __init__(self, current_state, parent=None, action=None):
+    def __init__(self, current_state, parent=None, action=None, from_='No Action '):
         self.current_state = current_state
         self.parent = parent
         self.action = action
+        self.from_ = from_
         if self.parent is not None:
             self.bfs_search = parent.bfs_search + 1
         else:
