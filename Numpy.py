@@ -20,18 +20,7 @@ def matrix(num_blocks):
     numpy.place(initial_puzzle_state, initial_puzzle_state == max_range - 1, 0)
     # convertir le tableau d'une dimension en une matrice
     initial_puzzle_state = numpy.reshape(initial_puzzle_state, (num_blocks, num_blocks))
-    return initial_puzzle_state
-
-
-def get_indices_of_elements(current_state):
-    current_state_indices = {}
-    for line in current_state:
-        for column in line:
-            global_index = numpy.argwhere(current_state == column)
-            line_index = global_index[0][0]
-            column_index = global_index[0][1]
-            current_state_indices[column] = [line_index, column_index]
-    return current_state_indices
+    return convert_from_numpy_to_list(initial_puzzle_state)
 
 
 def solvable(initial_input):
@@ -58,72 +47,35 @@ def solvable(initial_input):
     return False
 
 
-def count_manhattan_distance(current_state_matrix):
-    current_state_matrix_indices = get_indices_of_elements(current_state_matrix)
-    goal_state_indices = get_indices_of_elements(generate_goal_state(len(current_state_matrix)))
-    manhattan_distance = 0
-    for key_number in current_state_matrix_indices:
-        if current_state_matrix_indices[key_number] == goal_state_indices[key_number]:
-            continue
-        manhattan_distance += manhattan_distance_conditions(
-            current_state_matrix_indices, goal_state_indices, key_number, HORIZONTAL, VERTICAL)
-        manhattan_distance += manhattan_distance_conditions(
-            current_state_matrix_indices, goal_state_indices, key_number, VERTICAL, HORIZONTAL)
-        if current_state_matrix_indices[key_number][HORIZONTAL] != goal_state_indices[key_number][HORIZONTAL] and \
-                current_state_matrix_indices[key_number][VERTICAL] != goal_state_indices[key_number][VERTICAL]:
-            manhattan_distance += manhattan_distance_conditions_2(
-                current_state_matrix_indices, goal_state_indices, key_number, HORIZONTAL)
-            manhattan_distance += manhattan_distance_conditions_2(
-                current_state_matrix_indices, goal_state_indices, key_number, VERTICAL)
-    return manhattan_distance
-
-
-def count_misplaced_blocks(current_state):
-    misplaced_blocks = 0
-    current_state_blocks_position = get_indices_of_elements(current_state)
-    goal_state_blocks_position = get_indices_of_elements(generate_goal_state(len(current_state)))
-    for key_number in current_state_blocks_position:
-        if current_state_blocks_position[key_number] != goal_state_blocks_position[key_number]:
-            misplaced_blocks += 1
-    return misplaced_blocks
+def count_manhattan_distance_and_misplaced_blocks(current_state_matrix):
+    goal_state = generate_goal_state(len(current_state_matrix))
+    misplaced = 0
+    distance = 0
+    for i in range(len(current_state_matrix)):
+        for j in range(len(current_state_matrix)):
+            if current_state_matrix[i][j] != goal_state[i][j]:
+                misplaced += 1
+            if current_state_matrix[i][j] != 0:
+                x, y = divmod(current_state_matrix[i][j] - 1, len(current_state_matrix))
+                distance += abs(x - i) + abs(y - j)
+    return distance + misplaced
 
 
 def generate_goal_state(length):
-    goal_state = numpy.arange(1, numpy.square(length)+1)
-    goal_state = numpy.reshape(goal_state, (length, length))
-    numpy.place(goal_state, goal_state == numpy.square(length), 0)
+    goal_state = []
+    goal_state_using_numpy = numpy.arange(1, numpy.square(length)+1)
+    numpy.place(goal_state_using_numpy, goal_state_using_numpy == numpy.square(length), 0)
+    goal_state_using_numpy = numpy.reshape(goal_state_using_numpy, (length, length))
+    for line in goal_state_using_numpy:
+        line = line.tolist()
+        goal_state.append(line)
     return goal_state
 
 
-def manhattan_distance_conditions(current_state_indices, goal_state_indices, key_number, h_indice, v_indice):
-    manhattan_distance = 0
-    if current_state_indices[key_number][h_indice] == goal_state_indices[key_number][h_indice]:
-        if current_state_indices[key_number][v_indice] > goal_state_indices[key_number][v_indice]:
-            manhattan_distance += (current_state_indices[key_number][v_indice] - goal_state_indices[key_number][v_indice])
-        elif goal_state_indices[key_number][v_indice] > current_state_indices[key_number][v_indice]:
-            manhattan_distance += (goal_state_indices[key_number][v_indice] - current_state_indices[key_number][v_indice])
-    return manhattan_distance
+def convert_from_numpy_to_list(blocks):
+    state = []
+    for line in blocks:
+        line = line.tolist()
+        state.append(line)
+    return state
 
-
-def manhattan_distance_conditions_2(current_state_indices, goal_state_indices, key_number, h_v_value):
-    manhattan_distance = 0
-    if current_state_indices[key_number][h_v_value] > goal_state_indices[key_number][h_v_value]:
-        manhattan_distance += (current_state_indices[key_number][h_v_value] - goal_state_indices[key_number][h_v_value])
-    if goal_state_indices[key_number][h_v_value] > current_state_indices[key_number][h_v_value]:
-        manhattan_distance += (goal_state_indices[key_number][h_v_value] - current_state_indices[key_number][h_v_value])
-    return manhattan_distance
-
-
-def from_matrix_to_number(block):
-    matrix_as_unique_number = ''
-    for line in block:
-        for column in line:
-            matrix_as_unique_number += str(column)
-    return int(matrix_as_unique_number)
-
-
-def move(new_state, down_up_left_right_value):
-    numpy.place(new_state, new_state == down_up_left_right_value, -2)
-    numpy.place(new_state, new_state == 0, down_up_left_right_value)
-    numpy.place(new_state, new_state == -2, 0)
-    return new_state
