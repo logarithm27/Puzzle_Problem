@@ -16,7 +16,7 @@ class SolutionTaquin(object):
         self.heuristique = heuristique
 
     def initialiser(self):
-        
+
         for i, liste in enumerate(self.instance):
             for j, nbr in enumerate(liste):
                 if nbr == -1:
@@ -148,7 +148,7 @@ class SolutionTaquin(object):
         #On récupère g(E)
         g_E = etat.g_E
 
-        #On va calculer h(E)
+        #On va calculer heuristic(E)
 
         somme = 0
         if numeroH == 1:

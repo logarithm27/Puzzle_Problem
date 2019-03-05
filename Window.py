@@ -77,7 +77,7 @@ def test():
         node.current_state.print_state()
         steps += 1
 
-    print("Total number of steps: " + str(steps))
+    print("Total number of steps : " + str(steps))
     print("expansed : " + str(p[1]))
 
 

@@ -19,17 +19,17 @@ class Puzzle:
             return lambda: self._move(at, to)
 
         moves = []
-        for i, j in itertools.product(range(self.width),
+        for line_index, column_index in itertools.product(range(self.width),
                                       range(self.width)):
-            direcs = {'Right Move': (i, j-1),
-                      'Left Move': (i, j+1),
-                      'Down Move': (i-1, j),
-                      'Up Move': (i+1, j)}
+            direcs = {'Right Move': (line_index, column_index-1),
+                      'Left Move': (line_index, column_index+1),
+                      'Down Move': (line_index-1, column_index),
+                      'Up Move': (line_index+1, column_index)}
 
-            for action, (r, c) in direcs.items():
-                if r >= 0 and c >= 0 and r < self.width and c < self.width and \
-                        self.current_state[r][c] == 0:
-                    move = create_move((i,j), (r,c)), action
+            for action, (line, column) in direcs.items():
+                if line >= 0 and column >= 0 and line < self.width and column < self.width and \
+                        self.current_state[line][column] == 0:
+                    move = create_move((line_index,column_index), (line,column)), action
                     moves.append(move)
         return moves
 
