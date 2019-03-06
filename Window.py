@@ -47,6 +47,7 @@ class MainWindow:
                 continue
             self.node.append(node)
         self.ui.start_button.clicked.connect(lambda: self.on_button_click())
+        print("numebr of moves  : " + str(len(self.node)))
 
     def play_game(self):
         self.puzzle = Puzzle(self.instance)
