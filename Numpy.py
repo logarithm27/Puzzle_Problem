@@ -3,6 +3,8 @@
 # We want to build a matrix of a range equal to n²,
 # hence, to reach n², we add 1 because we start from 1 and not 0
 # max_range - start range = 10 - 1 = 9 = n²
+import math
+
 import numpy
 HORIZONTAL = 0
 VERTICAL = 1

@@ -30,10 +30,7 @@ from PyQt5 import QtCore, QtWidgets
 class MainWindow:
     def __init__(self, instance):
         self.instance = instance
-        print("solved in : ", timeit.timeit(lambda : self.play_game(), number=1))
-        print("expansed states : " + str(self.play[1]))
-        print("visited states " + str(self.play[2]))
-        print("click on play button ")
+        self.solved_in = timeit.timeit(lambda: self.play_game(), number=1)
         self.main_win = QMainWindow()
         self.ui = UiForm()
         self.ui.setup_ui(self.main_win, self.instance)
@@ -41,15 +38,15 @@ class MainWindow:
         self.main_win.setFixedSize(self.main_win.width(), self.main_win.height())
         self.blocks = self.ui.buttons
         self.utility = Utility()
-        # TO DO : functions slot to animate the block's move
+        print("solved in : " + str(self.solved_in) + " s"
+                              '\n' + "expansed states : " + str(self.play[1]) + '\n'
+                              + "visited states " + str(self.play[2]))
         self.node = []
         for i, node in enumerate(self.play[0]):
             if i == 0:
                 continue
             self.node.append(node)
         self.ui.start_button.clicked.connect(lambda: self.on_button_click())
-
-        # self.utility.blank_button.clicked.connect(lambda: self.on_button_click(self.utility.blank_button))
 
     def play_game(self):
         self.puzzle = Puzzle(self.instance)
@@ -79,9 +76,11 @@ class MainWindow:
             self.anim2.setEndValue(QRect(x_neighbor, y_neighbor, 77, 77))
             self.anim2.start()
             self.blocks = self.utility.permute_buttons(get_blank_button, get_button, self.blocks)
-            print(str(from_) + str(self.node[0].action))
-            print(self.node[0].current_state.print_state())
+            self.ui.label.setText(str(from_) + str(self.node[0].action))
+            # print(str(from_) + str(self.node[0].action))
+            # print(self.node[0].current_state.print_state())
             self.node.pop(0)
+
 
 
 if __name__ == '__main__':
