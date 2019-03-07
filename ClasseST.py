@@ -346,3 +346,15 @@ class SolutionTaquin(object):
             colonne = (colonne+1) % taille
         return taquin
 
+
+
+
+        
+
+
+
+ 
+
+
+
+
