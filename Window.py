@@ -42,7 +42,9 @@ class MainWindow:
         self.blocks = self.ui.buttons
         self.utility = Utility()
         self.ui.label.setText(" Solved in : " + str(self.solved_in) + " s"
-                              '\n' + " Expansed states : " + str(self.expansed))
+                              '\n' + " Expansed states : " + str(self.expansed)
+                              +'\n'+ " Required number of moves  : " + str(self.moves)
+                              )
         # self.node = []
         # for i, node in enumerate(self.play[0]):
         #     if i == 0:
@@ -50,7 +52,6 @@ class MainWindow:
         #     self.node.append(node)
         self.ui.start_button.clicked.connect(lambda: self.on_button_click())
         self.ui.shuffle.clicked.connect(lambda: self.on_shuffle_click())
-        print("numebr of moves  : " + str(self.moves))
 
     def play_game(self):
         # self.puzzle = Puzzle(self.instance)
@@ -127,7 +128,8 @@ class MainWindow:
             self.blocks = self.utility.permute_buttons(get_blank_button, get_button, self.blocks)
             self.ui.label.setText(" Solved in : " + str(self.solved_in) + " s"
                                   '\n' + " Expansed states : " + str(self.expansed)
-                                    +'\n'+" " + where_it_moved)
+                                    +'\n'+" " + where_it_moved +
+                                  '\n'+ " Required number of moves  : " + str(len(self.indices2)))
             # print(str(from_) + str(self.node[0].action))
             # print(self.node[0].current_state.print_state())
             self.indices2.pop(0)
