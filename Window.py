@@ -103,9 +103,6 @@ class MainWindow:
                 ac = str(state[ind[0]][ind[1]]) + ac
                 self.indices2.append((str(state[ind[0]][ind[1]]), ac))
 
-        for i in self.indices2:
-            print(i)
-
     def on_button_click(self):
         self.move()
 
