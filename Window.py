@@ -43,7 +43,7 @@ class MainWindow:
         self.utility = Utility()
         self.ui.label.setText(" Solved in : " + str(self.solved_in) + " s"
                               '\n' + " Expanded states : " + str(self.expansed)
-                              +'\n'+ " Number of moves  : " + str(self.moves)
+                              +'\n'+ " Number of moves  : " + str(self.moves -1)
                               )
         # self.node = []
         # for i, node in enumerate(self.play[0]):
