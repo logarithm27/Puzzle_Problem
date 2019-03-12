@@ -129,7 +129,7 @@ class MainWindow:
             self.ui.label.setText(" Solved in : " + str(self.solved_in) + " s"
                                   '\n' + " Expanded states : " + str(self.expansed)
                                     +'\n'+" " + where_it_moved +
-                                  '\n'+ " Number of moves  : " + str(len(self.indices2)))
+                                  '\n'+ " Number of moves  : " + str(len(self.indices2)-1))
             # print(str(from_) + str(self.node[0].action))
             # print(self.node[0].current_state.print_state())
             self.indices2.pop(0)
