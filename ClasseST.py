@@ -152,11 +152,12 @@ class SolutionTaquin(object):
                                 #On test à chaque fois s'il s'agit de l'état final 
                                 if self.isSolution(nvxEtat.hash):
                                     print("Nombre de deplacement requis = ", nvxEtat.g_E)
-                                    #self.afficherSolution(nvxEtat)
+                                    listeSolution = self.recupereListeSolution(nvxEtat)
+                                    #self.afficherSolution(listeSolution)
                                     #pause = input("...")
-                                    return False
+                                    return False, listeSolution
         #On retourne vrai s'il faut continuer à chercher la solution                  
-        return True
+        return True, None
                                 
     #On vérifie s'il s'agit de la solution en comparant les clé de hash avec la solution recherché
     def isSolution(self, hash):
@@ -166,8 +167,15 @@ class SolutionTaquin(object):
             return False
 
     #Fonction permettant d'afficher la solution
-    #Elle génére une liste contenant tout les états de transition entre l'instance et la solution 
-    def afficherSolution(self, etat):
+     
+    def afficherSolution(self, listeSolution):        
+
+        #On l'affiche
+        for etat in reversed(listeSolution):
+            self.afficherEtat(etat)
+        
+    #Elle génére une liste contenant tout les états de transition entre l'instance et la solution
+    def recupereListeSolution(self, etat):
 
         #On initialise cette liste
         listeSolution = []
@@ -180,9 +188,7 @@ class SolutionTaquin(object):
             etat = etat.parent
             listeSolution.append(etat)
 
-        #On l'affiche
-        for etat in reversed(listeSolution):
-            self.afficherEtat(etat)
+        return listeSolution
             
     #Fonction permettant d'afficher un état sur l'écran
     def afficherEtat(self, etat):

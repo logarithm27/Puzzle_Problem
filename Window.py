@@ -2,6 +2,7 @@
 import sys
 import threading
 import time
+
 from time import sleep
 
 from ClasseST import *
@@ -92,26 +93,62 @@ if __name__ == '__main__':
     #heuristique = int(heuristique)
 
     taquin = SolutionTaquin(taille)
-
-    for i in range(6, 10):
-        if i==6:
-            continue
-        start_time = time.time()
-        print("Heuristique: ", i)
-        taquin.frontiere = SortedDict()
-        taquin.explorer = {}
-        taquin.initialiser(i, taille)
+    testPerf6 = []
+    testPerf7 = []
+    testPerf8 = []
+    testPerf9 = []
+    for perf in range(10):
+        for i in range(6, 10):
+            if i==64:
+                continue
+            start_time = time.time()
+            print("Heuristique: ", i)
+            taquin.frontiere = SortedDict()
+            taquin.explorer = {}
+            taquin.initialiser(i, taille)
+            taquin.instance = taquin.creerInstanceAleatoire(taille)
         
-        test = True
-        while test:
-            listeEtat = taquin.frontiere.popitem(0)
-            for etat in listeEtat[1]:
-                test = taquin.expanser(etat, listeEtat[0], i, taille)
-                if not test:
-                    break
-                
-        print("Temps d execution : %s secondes ---" % (time.time() - start_time))
-        pause = input("Appuyez pour continuer...")
+            test = True
+            while test:
+                listeEtat = taquin.frontiere.popitem(0)
+                for etat in listeEtat[1]:
+                    test, listeSolution = taquin.expanser(etat, listeEtat[0], i, taille)
+                    if not test:
+                        break
+            if i == 6:
+                testPerf6.append(listeSolution[0].g_E)
+            if i == 7:
+                testPerf7.append(listeSolution[0].g_E)
+            if i == 8:
+                testPerf8.append(listeSolution[0].g_E)
+            if i == 9:
+                testPerf9.append(listeSolution[0].g_E)
+            #print("Temps d execution : %s secondes ---" % (time.time() - start_time))
+            #pause = input("Appuyez pour continuer...")
+    somme=0
+    for element in testPerf6:
+        somme += element
+    moyenne = somme / len(testPerf6)
+    print('La moyenne de heuristique 6 vaut: ', moyenne)
+    print('Max dans 6 = ', max(testPerf6))
+
+    somme=0
+    for element in testPerf7:
+        somme += element
+    moyenne = somme / len(testPerf7)
+    print('La moyenne de heuristique 7 vaut: ', moyenne)
+
+    somme=0
+    for element in testPerf8:
+        somme += element
+    moyenne = somme / len(testPerf8)
+    print('La moyenne de heuristique 8 vaut: ', moyenne)
+
+    somme=0
+    for element in testPerf9:
+        somme += element
+    moyenne = somme / len(testPerf9)
+    print('La moyenne de heuristique 9 vaut: ', moyenne)
        
 
     app = QApplication(sys.argv)
