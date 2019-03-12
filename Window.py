@@ -42,7 +42,7 @@ class MainWindow:
         self.blocks = self.ui.buttons
         self.utility = Utility()
         self.ui.label.setText(" Solved in : " + str(self.solved_in) + " s"
-                              '\n' + " Expansed states : " + str(self.expansed)
+                              '\n' + " Expanded states : " + str(self.expansed)
                               +'\n'+ " Number of moves  : " + str(self.moves)
                               )
         # self.node = []
@@ -127,7 +127,7 @@ class MainWindow:
             self.anim2.start()
             self.blocks = self.utility.permute_buttons(get_blank_button, get_button, self.blocks)
             self.ui.label.setText(" Solved in : " + str(self.solved_in) + " s"
-                                  '\n' + " Expansed states : " + str(self.expansed)
+                                  '\n' + " Expanded states : " + str(self.expansed)
                                     +'\n'+" " + where_it_moved +
                                   '\n'+ " Number of moves  : " + str(len(self.indices2)))
             # print(str(from_) + str(self.node[0].action))
