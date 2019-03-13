@@ -37,14 +37,13 @@ class MainWindow:
         self.main_win = QMainWindow()
         self.ui = UiForm()
         self.ui.setup_ui(self.main_win, self.states[0])
-        self.main_win.setStyleSheet("background-color: rgb(178, 222, 124)")
+        self.main_win.setStyleSheet("background-color: rgb(66, 81, 80)")
         self.main_win.setFixedSize(self.main_win.width(), self.main_win.height())
         self.blocks = self.ui.buttons
         self.utility = Utility()
         self.ui.label.setText(" Solved in : " + str(self.solved_in) + " s"
                               '\n' + " Expanded states : " + str(self.expansed)
-                              +'\n'+ " Number of moves  : " + str(self.moves -1)
-                              )
+                              + '\n' + " Number of moves  : " + str(self.moves - 1))
         # self.node = []
         # for i, node in enumerate(self.play[0]):
         #     if i == 0:
@@ -135,12 +134,13 @@ class MainWindow:
             self.indices2.pop(0)
 
     def on_shuffle_click(self):
-        taquin = SolutionTaquin(4)
+        num_blocks = 4
+        taquin = SolutionTaquin(num_blocks)
         taquin.frontiere = SortedDict()
         taquin.explorer = {}
-        taquin.initialiser(7, 4)
+        taquin.initialiser(7, num_blocks)
         # app = QApplication(sys.argv)
-        main_window = MainWindow(taquin, taquin.creerInstanceAleatoire(4))
+        main_window = MainWindow(taquin, taquin.creerInstanceAleatoire(num_blocks))
         main_window.show()
         self.main_win.close()
         # sys.exit(app.exec_())
@@ -209,12 +209,12 @@ if __name__ == '__main__':
     #     somme += element
     # moyenne = somme / len(testPerf9)
     # print('La moyenne de heuristique 9 vaut: ', moyenne)
-
-    taquin = SolutionTaquin(4)
+    num_blocks = 4
+    taquin = SolutionTaquin(num_blocks)
     taquin.frontiere = SortedDict()
     taquin.explorer = {}
-    taquin.initialiser(7, 4)
+    taquin.initialiser(7, num_blocks)
     app = QApplication(sys.argv)
-    main_window = MainWindow(taquin, taquin.creerInstanceAleatoire(4))
+    main_window = MainWindow(taquin, taquin.instance)
     main_window.show()
     sys.exit(app.exec_())

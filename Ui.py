@@ -34,10 +34,9 @@ class UiForm(object):
                     x_coordinate += 80
                 button = QtWidgets.QPushButton(form)
                 button.setGeometry(QtCore.QRect(x_coordinate, y_coordinate, width, height))
-                button.setStyleSheet("font: 22pt \"MS Shell Dlg 2\";\n"
-                                     "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, "
-                                     "stop:0 rgba(255, 178, 102, 255), stop:0.55 rgba(235, 148, 61, 255), "
-                                     "stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(0, 0, 0, 0));")
+                button.setStyleSheet("background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:1 rgba(84, 219, 252, 255));\n"
+                                     "border-radius:25px;\n"
+                                     "font: 18pt \"Segoe UI Semilight\";")
                 # the object name of each button is the number generated in the shuffled matrix
                 button.setObjectName(str(j))
                 button.setText(str(j))
@@ -48,20 +47,18 @@ class UiForm(object):
                 self.buttons[y_position].append(button)
 
         self.start_button = QtWidgets.QPushButton(form)
-        self.start_button.setGeometry(QtCore.QRect(0,width * num_blocks + 10, width * num_blocks +10,38))
-        self.start_button.setStyleSheet("font: 22pt \"MS Shell Dlg 2\";\n"
-                                        "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, "
-                                        "stop:0 rgba(255, 178, 102, 255), stop:0.55 rgba(235, 148, 61, 255), "
-                                        "stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(0, 0, 0, 0));")
+        self.start_button.setGeometry(QtCore.QRect(1,width * num_blocks +10, width * num_blocks +10,38))
+        self.start_button.setStyleSheet("background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:1 rgba(150, 252, 84, 255));\n"
+                                        "border-radius:25px;\n"
+                                        "font: 18pt \"Segoe UI Semilight\";")
         self.start_button.setObjectName('Move')
         self.start_button.setText('Play')
 
         self.shuffle = QtWidgets.QPushButton(form)
-        self.shuffle.setGeometry(QtCore.QRect(width * num_blocks +10, width * num_blocks + 10, width * num_blocks + 45,38))
-        self.shuffle.setStyleSheet("font: 22pt \"MS Shell Dlg 2\";\n"
-                                        "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, "
-                                        "stop:0 rgba(255, 178, 102, 255), stop:0.55 rgba(235, 148, 61, 255), "
-                                        "stop:0.98 rgba(0, 0, 0, 255), stop:1 rgba(0, 0, 0, 0));")
+        self.shuffle.setGeometry(QtCore.QRect(width * num_blocks +17, width * num_blocks+9, width * num_blocks + 35,38))
+        self.shuffle.setStyleSheet("background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:1 rgba(255, 118, 165, 255));\n"
+                                   "border-radius:25px;\n"
+                                   "font: 18pt \"Segoe UI Semilight\";")
         self.shuffle.setObjectName('SH')
         self.shuffle.setText('Shuffle')
 
